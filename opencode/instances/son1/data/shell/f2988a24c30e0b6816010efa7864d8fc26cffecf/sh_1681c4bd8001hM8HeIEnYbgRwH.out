@@ -1,0 +1,19 @@
+wire:key variant patched
+=== before tick ===
+  "instanceCount": 1,
+    "sameMapEl": true,
+    "wireRootId": "A1HZbTUyTCF3b3HKISbI",
+    "currentMapWireRootId": "A1HZbTUyTCF3b3HKISbI"
+    "recId": 1,
+    "paneCount": 7,
+    "layers": 1,
+    "svgPaths": 0,
+=== after first county tick ===
+  "instanceCount": 1,
+    "sameMapEl": true,
+    "wireRootId": "A1HZbTUyTCF3b3HKISbI",
+    "currentMapWireRootId": "A1HZbTUyTCF3b3HKISbI"
+    "recId": 1,
+    "paneCount": 7,
+    "layers": 4,
+    "svgPaths": 1,

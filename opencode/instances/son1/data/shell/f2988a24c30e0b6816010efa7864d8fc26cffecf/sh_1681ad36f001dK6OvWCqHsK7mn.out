@@ -1,0 +1,27 @@
+=== before tick ===
+  "instanceCount": 1,
+      "removed": false,
+      "removedAt": null,
+      "errors": []
+    "sameMapEl": true,
+    "wireRootId": "a4ONho4TCnc6w1VFIdvG",
+    "currentMapWireRootId": "a4ONho4TCnc6w1VFIdvG"
+    "recId": 1,
+    "paneCount": 7,
+    "layers": 1,
+    "svgPaths": 0,
+=== after first county tick ===
+  "instanceCount": 1,
+      "removed": false,
+      "removedAt": null,
+      "errors": []
+      "removed": [],
+      "removed": [],
+    "sameMapEl": true,
+    "wireRootId": "a4ONho4TCnc6w1VFIdvG",
+    "currentMapWireRootId": "a4ONho4TCnc6w1VFIdvG"
+    "recId": 1,
+    "paneCount": 7,
+    "layers": 4,
+    "svgPaths": 1,
+first instance removedAt: null first error t: undefined => error after removal: false

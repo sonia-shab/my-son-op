@@ -1,0 +1,60 @@
+275:                        wire:model.live="selectedRegions"
+291:                            wire:model.live="selectedCenterTypes"
+306:                            wire:model.live="selectedSubTypes"
+319:            <livewire:maps.map/>
+326:                        wire:model.live.debounce.300ms="search"
+337:                        wire:key="unit-{{ $unit['id'] }}"
+377:@script
+438:            var key = el.getAttribute('wire:key');
+446:    // Issue #028 — bind to the live map the store owns. onReady() replaces the
+450:    window.Alpine.store('map').onReady(function (map) {
+=== MapsUnitLivewireTest
+81:    public function test_guest_302(): void
+86:    public function test_unauthorized_403(): void
+88:        ['user' => $user] = $this->createUserWithUnit(['manage_users']);
+94:    public function test_renders(): void
+96:        ['user' => $user] = $this->createUserWithUnit(['map']);
+106:    public function test_unit_boundary(): void
+108:        ['user' => $user] = $this->createUserWithUnit(['map']);
+129:    public function test_scope_filtering(): void
+131:        ['user' => $user] = $this->createUserWithUnit(['map']);
+155:    public function test_search_filter(): void
+157:        ['user' => $user] = $this->createUserWithUnit(['map']);
+165:    public function test_region_filter_dispatches_events(): void
+167:        ['user' => $user] = $this->createUserWithUnit(['map']);
+180:    public function test_empty_state_without_units(): void
+182:        ['user' => $user] = $this->createUserWithUnit(['map']);
+198:    public function test_show_help_modal(): void
+200:        ['user' => $user] = $this->createUserWithUnit(['map']);
+211:    public function test_county_boundary_queries_do_not_grow_with_region_count(): void
+213:        ['user' => $user, 'unit' => $baseUnit] = $this->createUserWithUnit(['map']);
+253:    public function test_unit_queries_do_not_grow_with_unit_count(): void
+=== e2e layers
+1:import { test, expect, login } from '../shared/fixtures';
+6: * - /map (GIS dashboard): #map canvas renders `.leaflet-container`; units layer
+12: *   to #map width (relative container, no Bootstrap `container` wrapper).
+23:  test('map canvas renders', async ({ page }) => {
+24:    await expect(page.locator('#map')).toBeVisible();
+25:    await expect(page.locator('.leaflet-container').first()).toBeVisible();
+28:  test('units layer renders markers by default', async ({ page }) => {
+30:    await expect(units.first()).toBeVisible({ timeout: 10000 });
+32:    expect(await units.count()).toBeGreaterThan(10);
+35:  test('layer toggle switches to hardware/tickets', async ({ page }) => {
+41:    await expect(page.locator('.leaflet-container').first()).toBeVisible();
+44:  test('map is not half-width', async ({ page }) => {
+49:      expect(w).toBeGreaterThan(400);
+58:    test(`${path} renders a Leaflet map`, async ({ page }) => {
+63:      await expect(page.locator('.leaflet-container').first()).toBeVisible({ timeout: 10000 });
+67:  test('/maps/point plots many point markers', async ({ page }) => {
+72:    expect(await page.locator('.leaflet-marker-icon').count()).toBeGreaterThan(100);
+85:  test('filter toggle leaks no zoomanim listeners and markers follow zoom', async ({
+94:      () => document.querySelectorAll('#map .leaflet-marker-icon').length > 100,
+102:    expect(isRaw).toBe(true);
+105:      markers: document.querySelectorAll('#map .leaflet-marker-icon').length,
+111:      (n) => document.querySelectorAll('#map .leaflet-marker-icon').length !== n,
+125:        markers: document.querySelectorAll('#map .leaflet-marker-icon').length,
+132:    expect(after.zombies).toBe(0);
+133:    expect(after.zoomanim - after.markers).toBeLessThanOrEqual(
+175:    expect(moved.total).toBeGreaterThan(50);
+176:    expect(moved.movedCount).toBeGreaterThan(moved.total * 0.9);
+177:    expect(errors.filter((m) => m.includes('_latLngToNewLayerPoint'))).toHaveLength(0);

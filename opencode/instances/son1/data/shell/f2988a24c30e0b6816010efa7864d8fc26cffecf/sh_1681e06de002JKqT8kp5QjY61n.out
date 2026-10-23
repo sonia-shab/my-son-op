@@ -1,0 +1,51 @@
+27:            BoundarySeeder::class,
+32:            RegionSeeder::class,
+63:            CenterBoundarySeeder::class,
+64:            HealthHouseBoundarySeeder::class,
+=== boundary seeders
+BoundarySeeder.php
+CenterBoundarySeeder.php
+HealthHouseBoundarySeeder.php
+RegionSeeder.php
+UnitCapabilitySeeder.php
+UnitSeeder.php
+UnitTypeRelationshipSeeder.php
+UnitTypeSeeder.php
+UserUnitSeeder.php
+health_house_boundaries_data.php
+=== js test runner
+4:    "scripts": {
+5-        "build": "vite build",
+6-        "dev": "vite",
+7-        "typecheck": "tsc --noEmit"
+8-    },
+9-    "devDependencies": {
+10-        "@playwright/test": "^1.63.0",
+11-        "@tailwindcss/vite": "^4.0",
+12-        "@types/node": "^26.6.5",
+13-        "concurrently": "^9.0.1",
+14-        "daisyui": "^5.5.23",
+15-        "laravel-vite-plugin": "^3.0",
+16-        "tailwindcss": "^4.0.14",
+=== e2e unit path in layers
+    }
+  });
+});
+
+test.describe('maps — ancillary pages', () => {
+  const pages = ['/maps/unit', '/maps/route', '/maps/route2', '/maps/county', '/maps/point'];
+
+  for (const path of pages) {
+    test(`${path} renders a Leaflet map`, async ({ page }) => {
+      await login(page);
+      await page.goto(path);
+      await page.waitForLoadState('networkidle');
+      await page.waitForTimeout(2000);
+      await expect(page.locator('.leaflet-container').first()).toBeVisible({ timeout: 10000 });
+    });
+  }
+
+  test('/maps/point plots many point markers', async ({ page }) => {
+    await login(page);
+    await page.goto('/maps/point');
+    await page.waitForLoadState('networkidle');

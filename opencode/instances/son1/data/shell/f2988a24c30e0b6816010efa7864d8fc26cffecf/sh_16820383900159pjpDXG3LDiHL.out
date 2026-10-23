@@ -1,0 +1,4 @@
+--- store history
+77bdda1a fix(maps): keep Leaflet instance out of Alpine reactivity (#769)
+3d38c422 fix(maps): own the Leaflet lifecycle in an Alpine store (issue #028)
+--- open PRs

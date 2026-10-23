@@ -1,0 +1,22 @@
+30:       claimed by Livewire and its init() never runs — the map silently never
+32:    2. $refs.map resolves fine ACROSS the wire:ignore boundary (verified), so
+36:    Alpine fires destroy() before init() on SPA navigation, so release() tears
+42:            init() {
+52:                const map = $store.map.use(this.$refs.map);
+64:            destroy() {
+68:                $store.map.release(this.$refs.map);
+=== unit anchors
+21:     * the `units-updated` event payload alone (see unitsWithGeometry()).
+86:            $this->dispatch('county-boundaries-loaded', counties: []);
+131:        $this->dispatch('county-boundaries-loaded', counties: $counties);
+146:     * `units-updated` event is built from, read only when it is dispatched.
+242:        $this->dispatch('units-updated', units: $rows);
+319:            <livewire:maps.map/>
+383:    // `units-updated` event and are handed to `allUnits` by its listener below.
+446:    // Issue #028 — bind to the live map the store owns. onReady() replaces the
+450:    window.Alpine.store('map').onReady(function (map) {
+476:        Livewire.on('county-boundaries-loaded', function({ counties }) {
+480:        Livewire.on('units-updated', function({ units }) {
+=== leaflet remove internals
+_panes=[],delete this._mapPane,delete this._renderer,this},createPane:function(t,e){e=P("
+delete this._mapPane,delete this._renderer,this},createPane:function(t,e){e=P("d

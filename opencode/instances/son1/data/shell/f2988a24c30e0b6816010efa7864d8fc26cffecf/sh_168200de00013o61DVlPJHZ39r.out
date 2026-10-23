@@ -1,0 +1,29 @@
+ M composer.lock
+ M package-lock.json
+30100 /bin/bash -c git status --porcelain; pgrep -af "port=8002" || echo "server stopped"; sed -n '255,280p' tests/Feature/PageScriptSplittingTest.php
+
+    /**
+     * #1182 — the order is the whole point: `jalaliDatepicker` is a plain global
+     * declared by the loaded file, and every date page calls `startWatch()` from
+     * its own init. If the asset ever lands after that init, the page throws
+     * `jalaliDatepicker is not defined` and every date field on it is inert.
+     *
+     * Asserted against the view source, not the rendered HTML: Livewire 4
+     * compiles a component's `@script` into a deferred effect and its plain
+     * `<script>` into a module (`storage/framework/views/livewire/scripts/*.js`),
+     * so both run AFTER the `@stack('scripts')` block and the rendered document
+     * order says nothing about them. What pins the runtime order is the asset
+     * sitting above the init in the same file — which is what this checks.
+     */
+    public function test_jalalidatepicker_is_loaded_before_the_init_that_uses_it(): void
+    {
+        foreach ($this->datePages() as $url => [, $view]) {
+            $contents = (string) file_get_contents(resource_path('views/'.$view));
+
+            $assetAt = strpos($contents, self::JALALI_DATEPICKER);
+            $initAt = strpos($contents, 'jalaliDatepicker.startWatch');
+
+            $this->assertNotFalse($assetAt, "{$url}: the view never loads ".self::JALALI_DATEPICKER.'.');
+            $this->assertNotFalse($initAt, "{$url}: the view never calls jalaliDatepicker.startWatch().");
+            $this->assertLessThan(
+                $initAt,

@@ -1,0 +1,50 @@
+<?php
+
+namespace Tests\Feature;
+
+use Database\Seeders\PermissionSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
+use Illuminate\Testing\TestResponse;
+use Livewire\Livewire;
+use Tests\Support\Concerns\InteractsWithTestSetup;
+use Tests\TestCase;
+
+/**
+ * Issue #984 — page-specific JS libraries must ship only with the pages that
+ * use them.
+ *
+ * The global layout used to load three libraries on ALL ~30 pages:
+ *   leaflet-routing-machine  564,710 B  -> /maps/route, /maps/route2
+ *   leaflet.draw              67,484 B  -> /units/{id}/map
+ *   full-calendar            281,849 B  -> /todo
+ * = 914,043 B of render-blocking JS (~85% of the layout's 1,081,303 B) that the
+ * other 27 pages never executed. Each page now loads its own library instead —
+ * `@assets` since #1182, which Livewire injects into <head> (a `@push('scripts')`
+ * tag lands at the end of <body>, too late for a component that needs the library
+ * in its Alpine `init()` on a `wire:navigate` visit).
+ *
+ * Issue #1182 — the last two global libraries left the layout the same way:
+ *   leaflet                ~142 KB -> 8 pages (7 `maps.map` hosts + units/map)
+ *   jalalidatepicker        ~25 KB -> 6 pages with Persian date fields
+ * Leaflet is the dangerous half: `maps/map.blade.php` builds the map when its
+ * Alpine `init()` runs, so a host page that forgets the asset renders an EMPTY
+ * map instead of failing loudly (the #028 failure mode). The host list comes
+ * from `grep -rln "livewire:maps.map" resources/views` — county, point and
+ * map-no-boundary never mention "leaflet" and were missing from the first plan.
+ *
+ * These assertions run against the rendered HTML of a real page load, so they
+ * prove three things at once: the library left the layout, it did NOT leave the
+ * page that needs it (a split where the map page silently loses its routing
+ * control is a regression, not a win), and no page picked up a library it never
+ * uses. Every test asserts 200 plus a page-specific marker first: a 403 or 500
+...
+17: * The global layout used to load three libraries on ALL ~30 pages:
+27: * Issue #1182 — the last two global libraries left the layout the same way:
+104:        // #1182: Leaflet and jalalidatepicker are no longer global either — the
+215:     * global. Now they must load it themselves.
+257:     * #1182 — the order is the whole point: `jalaliDatepicker` is a plain global
+272:            $contents = (string) file_get_contents(resource_path('views/'.$view));
+334:        expect($offenders)->toBe([]);
+396:            "{$url} must load {$library} itself — it is no longer in the global layout.",
+413:            "{$url}: '{$first}' must come before '{$second}', or the init runs against an undefined global.",

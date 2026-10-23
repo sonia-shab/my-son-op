@@ -1,0 +1,41 @@
+189:                <x-button label="حذف مرز" icon="o-trash" class="btn-error" wire:click="deleteBoundary"
+232:        var unitMap = L.map('unitMap').setView([36.558188, 48.716125], 8);
+=== unit map php class head
+<?php
+
+use App\Models\Unit;
+use App\Services\AccessService;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Locked;
+use Livewire\Component;
+use Mary\Traits\Toast;
+
+return new class extends Component {
+    use Toast;
+
+    #[Locked]
+    public int $unitId;
+    public ?array $unit = null;
+    public ?string $geojson = null;
+    public bool $hasBoundary = false;
+
+    public function mount(int $id): void
+    {
+        $this->unitId = $id;
+        $this->loadUnit();
+    }
+
+    /**
+     * Issue #817: the org tree IS the authorization model — boundary reads
+     * and writes must prove the unit sits inside the caller's reachable set.
+     */
+    private function assertUnitInScope(int $unitId): bool
+    {
+=== rendered map component count per page
+resources/views/livewire/maps/county.blade.php:1
+resources/views/livewire/maps/point.blade.php:1
+resources/views/livewire/maps/route.blade.php:1
+resources/views/livewire/maps/route2.blade.php:1
+resources/views/livewire/maps/unit.blade.php:1
+resources/views/livewire/map/map-dashboard.blade.php:1
+resources/views/livewire/reports/map-no-boundary.blade.php:1

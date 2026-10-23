@@ -1,0 +1,21 @@
+2 | زنجان | units=150
+3 | ابهر | units=54
+4 | ایجرود | units=50
+5 | خدابنده | units=164
+6 | خرمدره | units=19
+7 | ماهنشان | units=66
+8 | سلطانیه | units=34
+9 | طارم | units=5
+---types---
+region 2 type 5 count 18
+region 5 type 7 count 18
+region 2 type 7 count 17
+region 7 type 7 count 9
+region 5 type 6 count 7
+region 4 type 7 count 6
+region 3 type 7 count 6
+region 6 type 5 count 5
+region 8 type 7 count 5
+region 3 type 5 count 4
+region 3 type 6 count 4
+region 6 type 7 count 2

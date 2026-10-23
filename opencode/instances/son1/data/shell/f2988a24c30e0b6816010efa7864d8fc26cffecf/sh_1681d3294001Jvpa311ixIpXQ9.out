@@ -1,0 +1,29 @@
+{
+ "menuChildren": 19,
+ "inputsInMenu": 19,
+ "keysInMenu": [
+  "unit-56",
+  "unit-57",
+  "unit-58",
+  "unit-59",
+  "unit-60"
+ ],
+ "firstToggleHtml": "<input id=\"mary455cbca474e54e7b6ea66b9eab0b5623\" type=\"checkbox\" class=\"toggle order-2\" wire:key=\"unit-56\" x-on:change=\"$event.target.checked ? toggleGeoJsonOn(56) : toggleGeoJsonOff(56)\">",
+ "instances": [
+  {
+   "id": 1,
+   "removed": false,
+   "errors": 0
+  }
+ ],
+ "live": {
+  "id": 1,
+  "layers": 40,
+  "panes": 7
+ },
+ "svgPaths": 19
+}
+row checkboxes: 18
+after unit row toggle: {"svgPaths":19,"liveLayers":40,"instances":[{"id":1,"removed":false,"errors":0}],"domPanes":7}
+after search re-render: {"svgPaths":19,"instances":[{"id":1,"removed":false,"errors":0}],"domPanes":7}
+errors: 0 []

@@ -1,0 +1,5 @@
+{"label":"unit:load","url":"/maps/unit","instances":[{"id":1,"removed":false,"connected":true,"errors":0}],"live":{"id":1,"panes":7,"layers":1},"dom":{"maps":1,"containers":1,"panes":7,"detachedContainers":0}}
+{"label":"unit:after-county","url":"/maps/unit","instances":[{"id":1,"removed":false,"connected":true,"errors":0}],"live":{"id":1,"panes":7,"layers":4},"dom":{"maps":1,"containers":1,"panes":7,"detachedContainers":0}}
+{"label":"point:after-navigate","url":"/maps/point","instances":[{"id":1,"removed":true,"connected":false,"errors":0},{"id":2,"removed":false,"connected":true,"errors":0}],"live":{"id":2,"panes":7,"layers":1569},"dom":{"maps":1,"containers":1,"panes":7,"detachedContainers":0}}
+{"label":"unit:after-back","url":"/maps/unit","instances":[{"id":1,"removed":true,"connected":false,"errors":0},{"id":2,"removed":true,"connected":false,"errors":0},{"id":3,"removed":false,"connected":true,"errors":0}],"live":{"id":3,"panes":7,"layers":1},"dom":{"maps":1,"containers":1,"panes":7,"detachedContainers":0}}
+errors: 0 []

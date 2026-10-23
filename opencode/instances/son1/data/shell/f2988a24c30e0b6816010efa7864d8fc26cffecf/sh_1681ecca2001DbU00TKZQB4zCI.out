@@ -1,0 +1,20 @@
+root-key variant patched
+=== before tick ===
+  "instanceCount": 1,
+    "sameMapEl": true,
+    "wireRootId": "E63zjObYqbrt7xAN3xHG",
+    "currentMapWireRootId": "E63zjObYqbrt7xAN3xHG"
+    "recId": 1,
+    "paneCount": 7,
+    "layers": 1,
+    "svgPaths": 0,
+[console.error] Error adding county boundary: TypeError: Cannot read properties of undefined (reading 'appendChild')
+=== after first county tick ===
+  "instanceCount": 2,
+    "sameMapEl": false,
+    "wireRootId": "E63zjObYqbrt7xAN3xHG",
+    "currentMapWireRootId": "SEWe4P4rtg8yRVr8pN0K"
+    "recId": 2,
+    "paneCount": 7,
+    "layers": 1,
+    "svgPaths": 0,

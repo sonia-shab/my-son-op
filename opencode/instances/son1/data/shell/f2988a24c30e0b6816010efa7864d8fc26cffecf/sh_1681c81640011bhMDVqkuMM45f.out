@@ -1,0 +1,46 @@
+--- after-load
+  "instanceCount": 1,
+  "removedIds": [],
+    "id": 1,
+  "addLayerErrorCount": 0,
+  "domPanes": 7,
+county checkbox count: 8
+--- after-county-on
+  "instanceCount": 1,
+  "removedIds": [],
+    "id": 1,
+  "addLayerErrorCount": 0,
+  "domPanes": 7,
+--- after-county-off
+  "instanceCount": 1,
+  "removedIds": [],
+    "id": 1,
+  "addLayerErrorCount": 0,
+  "domPanes": 7,
+--- after-county-on-2
+  "instanceCount": 1,
+  "removedIds": [],
+    "id": 1,
+  "addLayerErrorCount": 0,
+  "domPanes": 7,
+center checkbox count: 3
+--- after-center-on
+  "instanceCount": 1,
+  "removedIds": [],
+    "id": 1,
+  "addLayerErrorCount": 0,
+  "domPanes": 7,
+--- after-center-off
+  "instanceCount": 1,
+  "removedIds": [],
+    "id": 1,
+  "addLayerErrorCount": 0,
+  "domPanes": 7,
+--- after-center-on-2
+  "instanceCount": 1,
+  "removedIds": [],
+    "id": 1,
+  "addLayerErrorCount": 0,
+  "domPanes": 7,
+unit row toggles: 0
+total error lines: 0

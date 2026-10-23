@@ -1,0 +1,21 @@
+0ba28f5c
+ M composer.lock
+ M package-lock.json
+=== tests list
+64:test.describe('maps — SPA navigation lifecycle (#028)', () => {
+70:    test(`${from} → /maps/point renders point markers`, async ({ page }) => {
+97:  test('/maps/point → /maps/county → /maps/point round trip keeps markers', async ({ page }) => {
+114:  test('/dashboard → /maps/point renders markers (non-map origin)', async ({ page }) => {
+135:  test('/dashboard → /maps/county renders the map and its region toggles still draw', async ({ page }) => {
+156:  test('direct load still renders markers (no regression)', async ({ page }) => {
+=== unit feature tests lines
+71:    private function dispatchedUnits($test): array
+73:        $dispatch = collect($test->effects['dispatches'] ?? [])
+76:        return $dispatch['params']['units'] ?? [];
+165:    public function test_region_filter_dispatches_events(): void
+174:            ->assertDispatched('county-boundaries-loaded')
+175:            ->assertDispatched('units-updated');
+204:            ->assertSet('showHelpModal', false)
+240:            ->assertDispatched('county-boundaries-loaded', function (string $name, array $params): bool {
+331:        $units = $this->dispatchedUnits($test);
+378:        $units = $this->dispatchedUnits($test);
