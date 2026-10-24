@@ -1,0 +1,18 @@
+=== run 40009174033 (failure) ===
+PHP 8.6 Preview (non-blocking) => success
+Typecheck (Playwright specs, informational) => success
+Code Style (Pint) => success
+PHPStan Static Analysis => failure
+E2E Tests (Playwright) => cancelled
+Tests & Coverage => success
+Mutation Testing => skipped
+Coverage Report (Blade-aware, informational) => success
+=== run 39437234712 (failure) ===
+E2E Tests (Playwright) => success
+Tests & Coverage => success
+PHPStan Static Analysis => failure
+Typecheck (Playwright specs, informational) => success
+Code Style (Pint) => success
+PHP 8.6 Preview (non-blocking) => success
+Mutation Testing => skipped
+Coverage Report (Blade-aware, informational) => success

@@ -1,0 +1,13 @@
+=== recent E2E job conclusions (beta pushes/PRs) ===
+[{"conclusion":"","count":1},{"conclusion":"cancelled","count":3},{"conclusion":"failure","count":1},{"conclusion":"success","count":20}]
+=== latest 10 runs ===
+2026-10-24T19:29:07Z beta 
+2026-10-24T18:30:30Z docs/fix-stale-sweep-policy success
+2026-10-24T18:28:23Z docs/remove-location-log success
+2026-10-24T17:20:31Z fix/1231-theme-35-contrast success
+2026-10-24T16:58:53Z feat/1231-theme-sweep-noncore cancelled
+2026-10-24T16:16:47Z syd1 success
+2026-10-24T16:02:06Z sad1 success
+2026-10-24T09:02:02Z feat/1227-all-daisyui-themes success
+2026-10-24T08:23:01Z feat/1227-all-daisyui-themes cancelled
+2026-10-23T19:09:33Z feat/1227-activate-35-themes failure

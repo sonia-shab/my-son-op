@@ -1,0 +1,45 @@
+=== triggers ===
+3:on:
+4-  pull_request:
+5-    branches: [main, beta, test]
+6-  # Manual runs exist for the `mutation` job below, which is gated to this
+7-  # trigger (#1012): a manual run executes every job, so read the mutation
+8-  # job's own result, not the run's overall conclusion.
+9-  workflow_dispatch:
+10-
+11-concurrency:
+=== jobs + continue-on-error + names ===
+3:on:
+4:  pull_request:
+5:    branches: [main, beta, test]
+9:  workflow_dispatch:
+12:  group: ${{ github.workflow }}-${{ github.ref }}
+13:  cancel-in-progress: true
+16:  lint:
+17:    name: Code Style (Pint)
+60:  test:
+61:    name: Tests & Coverage
+208:  coverage-report:
+209:    name: Coverage Report (Blade-aware, informational)
+222:    if: always()
+228:    continue-on-error: true
+250:      # (the #865 trap), and the job stays non-blocking via continue-on-error.
+266:  typecheck:
+267:    name: Typecheck (Playwright specs, informational)
+275:    continue-on-error: true
+294:        # this job red so it is visible in the checks list. `continue-on-error`
+298:  e2e:
+299:    name: E2E Tests (Playwright)
+305:    # Ship continue-on-error:true now; promote to required only after two
+308:    continue-on-error: true
+449:  mutation:
+450:    name: Mutation Testing
+454:    # on every PR for a signal that gates nothing (`continue-on-error: true`).
+457:    if: github.event_name == 'workflow_dispatch'
+462:    continue-on-error: true
+538:        # No --min threshold: the job is informational (continue-on-error: true)
+542:  phpstan:
+543:    name: PHPStan Static Analysis
+578:  test-php86:
+579:    name: PHP 8.6 Preview (non-blocking)
+585:    continue-on-error: true

@@ -1,0 +1,18 @@
+=== all open PRs any base ===
+[{"headRefName":"beta","mergedAt":"2026-10-06T10:04:02Z","number":825,"state":"MERGED","title":"Beta to main"},{"headRefName":"dependabot/github_actions/actions/setup-node-7","mergedAt":"2026-10-04T14:32:48Z","number":802,"state":"MERGED","title":"chore(deps): bump actions/setup-node from 5 to 7"},{"headRefName":"dependabot/github_actions/codecov/codecov-action-7","mergedAt":null,"number":801,"state":"CLOSED","title":"chore(deps): bump codecov/codecov-action from 5 to 7"},{"headRefName":"dependabot/github_actions/actions/cache-6","mergedAt":null,"number":800,"state":"CLOSED","title":"chore(deps): bump actions/cache from 5 to 6"},{"headRefName":"dependabot/github_actions/actions/checkout-7","mergedAt":null,"number":799,"state":"CLOSED","title":"chore(deps): bump actions/checkout from 5 to 7"},{"headRefName":"beta","mergedAt":"2026-10-04T14:03:44Z","number":798,"state":"MERGED","title":"Beta to main"},{"headRefName":"beta","mergedAt":"2026-10-03T13:09:45Z","number":790,"state":"MERGED","title":"Beta to main"},{"headRefName":"beta","mergedAt":"2026-09-27T08:38:54Z","number":724,"state":"MERGED","title":"Beta"},{"headRefName":"beta","mergedAt":"2026-09-21T17:16:48Z","number":656,"state":"MERGED","title":"Beta"},{"headRefName":"beta","mergedAt":"2026-09-21T14:41:27Z","number":652,"state":"MERGED","title":"Beta"}]
+=== previous main merges (beta syncs) ===
+2e624be1 Merge pull request #825 from asgarimehdi/beta
+01ac8ff0 Merge pull request #823 from Haylin2/aram
+a2085607 Merge pull request #821 from haileen5/sydney
+243d34c5 Merge pull request #822 from Shabakebehdasht/rebecca
+f69f8482 Merge pull request #824 from nashenas7/candle
+75916b80 Merge pull request #820 from nashenas6/sink
+c21b064e Merge pull request #807 from Shabakebehdasht/reyhane
+d6186328 fix(security): startEdit resolves through findTicketComment (#814 review)
+37eda6aa fix(hardware): org-scope the Livewire audit trail — trash list, rollback and restore — closes #816
+06aa7692 chore(phpstan): regenerate baseline so the two stale ignore.count entries match reality
+b44d31e7 chore(phpstan): regen baseline for units.index/map line shifts (#817)
+9420820a fix(security): authorize imports and wire TicketCommentPolicy into ticket-comments (#814)
+8071da58 chore(phpstan): align baseline counts with the resolved PHPStan version
+e5ebd82e chore(phpstan): regenerate baseline counts drifted upstream
+afc533cd fix(tickets): gate inbox forward/submitAction on manage_unit_tickets and validate the target unit (#818)

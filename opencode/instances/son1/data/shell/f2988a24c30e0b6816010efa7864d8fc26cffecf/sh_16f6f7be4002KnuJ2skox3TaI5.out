@@ -1,0 +1,4 @@
+=== my permissions ===
+{"admin":false,"maintain":false,"pull":true,"push":true,"triage":true}
+=== existing rulesets ===
+[]

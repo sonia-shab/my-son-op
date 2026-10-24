@@ -1,0 +1,6 @@
+=== E2E job durations (last 8 runs) ===
+2026-10-24T19:00:04Z
+2026-10-24T18:51:26Z
+2026-10-24T17:50:21Z
+--- via checks on recent PRs ---
+{"conclusion":"success","end":"2026-10-24T19:00:04Z","start":"2026-10-24T18:30:33Z"}

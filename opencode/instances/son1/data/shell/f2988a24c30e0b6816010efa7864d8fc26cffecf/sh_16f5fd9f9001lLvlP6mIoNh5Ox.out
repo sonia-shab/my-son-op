@@ -1,0 +1,10 @@
+=== beta head ===
+8456acbd Merge pull request #1238 from asgarimehdi/docs/fix-stale-sweep-policy
+943cea6e Merge pull request #1237 from asgarimehdi/docs/remove-location-log
+450e186b docs: fix stale sweep-policy claims after #1231 hard lock
+=== location refs in md (expect none) ===
+(none)
+=== stale sweep claims (expect none) ===
+canonical/beta:docs/agents/features.md:154:(e43e1f60) the shared STRUCTURAL map is empty — the winter/abyss `badge solid` cells now
+=== AGENTS.md lines ===
+171

@@ -1,0 +1,4 @@
+=== #867 ===
+{"closedAt":"2026-10-09T11:12:34Z","number":867,"state":"CLOSED","title":"[improve] 176 تست Playwright هرگز در CI اجرا نشده — تنها workflow ریپو هیچ ارجاعی به e2e ندارد"}
+=== #1012 mutation ===
+{"number":1012,"state":"CLOSED","title":"CI mutation job spends a 30-minute budget on every PR for a run the workflow itself documents as never passing"}

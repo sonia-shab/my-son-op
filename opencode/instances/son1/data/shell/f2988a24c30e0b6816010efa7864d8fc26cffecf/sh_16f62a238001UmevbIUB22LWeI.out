@@ -1,0 +1,6 @@
+=== open PRs targeting main ===
+[]
+=== any open PR head=beta ===
+[]
+=== PR #825 body ===
+{"body":"\u003c!-- توضیح «چرا»، نه فقط «چه»: چه مشکلی حل شد، چه تصمیمی گرفته شد، چه ریسکی داشت. --\u003e\r\n\r\n## چرا؟\r\n\r\n\u003c!-- متن --\u003e\r\n\r\n## چک‌لیست\r\n\r\n- [x] برنچ با `beta` سینک است (مقایسهٔ صریح با `origin/beta` — `scripts/sync-beta.sh`)\r\n- [x] تست‌ها محلی سبزند (`composer verify` سبز؛ بدون آن PR فقط حدس است)\r\n- [x] تغییرات commit و push شده‌اند\r\n- [x] توضیح «چرا» بالا نوشته شده، نه فقط «چه»\r\n\r\n\u003c!-- CI (jobهای test.yml) مرجع نهایی است؛ هوک‌های محلی با --no-verify قابل دور زدن‌اند. --\u003e\r\n","commitCount":30,"title":"Beta to main"}
