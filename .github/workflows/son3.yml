@@ -4,47 +4,47 @@ on:
   workflow_dispatch:
     inputs:
       openrouter_account:
-        description: "OpenRouter account name (must exist in the OPENROUTER_KEYS secret JSON; empty = default Zen + OpenCode account)"
+        description: "OpenRouter account name (must exist in the OPENROUTER_KEYS secret JSON; empty = Raw (no account, DeepSeek default))"
         required: false
         default: ""
         type: string
       openrouter_model:
-        description: "OpenRouter model id, e.g. vendor/model:free (empty = default Zen + OpenCode account)"
+        description: "OpenRouter model id, e.g. vendor/model:free (empty = Raw (no account, DeepSeek default))"
         required: false
         default: ""
         type: string
       nvidia_account:
-        description: "NVIDIA account name (must exist in the NVIDIA_KEYS secret JSON; empty = default Zen + OpenCode account)"
+        description: "NVIDIA account name (must exist in the NVIDIA_KEYS secret JSON; empty = Raw (no account, DeepSeek default))"
         required: false
         default: ""
         type: string
       nvidia_model:
-        description: "NVIDIA NIM model id, e.g. nvidia/nemotron-3-ultra-550b-a55b (empty = default Zen + OpenCode account)"
+        description: "NVIDIA NIM model id, e.g. nvidia/nemotron-3-ultra-550b-a55b (empty = Raw (no account, DeepSeek default))"
         required: false
         default: ""
         type: string
       custom_preset:
-        description: "Custom preset name (must exist in the CUSTOM_KEYS secret JSON; empty = default Zen + OpenCode account)"
+        description: "Custom preset name (must exist in the CUSTOM_KEYS secret JSON; empty = Raw (no account, DeepSeek default))"
         required: false
         default: ""
         type: string
       custom_base_url:
-        description: "Custom preset base URL, e.g. https://api.example.com (empty = default Zen + OpenCode account)"
+        description: "Custom preset base URL, e.g. https://api.example.com (empty = Raw (no account, DeepSeek default))"
         required: false
         default: ""
         type: string
       custom_model:
-        description: "Custom preset model id, e.g. vendor/model (empty = default Zen + OpenCode account)"
+        description: "Custom preset model id, e.g. vendor/model (empty = Raw (no account, DeepSeek default))"
         required: false
         default: ""
         type: string
       opencode_account:
-        description: "OpenCode account name (must exist in the OPENCODE_KEYS secret JSON; Remote-Op sends the per-machine account automatically on a plain dispatch; empty = no Zen auth — fails fast)"
+        description: "OpenCode account name (must exist in the OPENCODE_KEYS secret JSON; Remote-Op sends the per-machine account automatically when OpenCode is picked; empty = Raw (no account))"
         required: false
         default: ""
         type: string
       nine_router:
-        description: "Set to \"true\" to run this machine on 9router/code instead of the default Zen + OpenCode account; empty = default"
+        description: "Set to \"true\" to run this machine on 9router/code instead of Raw (no account); empty = Raw"
         required: false
         default: ""
         type: string
@@ -348,7 +348,7 @@ jobs:
       # 12b. Per-run OpenRouter choice (Remote-Op dispatch inputs only).
       #     Runs ONLY when a dispatch carried an account name; a plain
       #     dispatch (or any other trigger) skips it and the run keeps
-      #     the default Zen + OpenCode account setup. The token is NEVER sent in the
+      #     the Raw default (no account). The token is NEVER sent in the
       #     dispatch: it is read here from the OPENROUTER_KEYS secret
       #     (one JSON object, account name -> token, set by the repo
       #     owner), masked, and exported via $GITHUB_ENV so step 13
@@ -396,7 +396,7 @@ jobs:
       # 12c. Per-run NVIDIA choice (Remote-Op dispatch inputs only).
       #     Runs ONLY when a dispatch carried an account name; a plain
       #     dispatch (or any other trigger) skips it and the run keeps
-      #     the default Zen + OpenCode account setup. Same shape as step 12b: the token is
+      #     the Raw default (no account). Same shape as step 12b: the token is
       #     NEVER sent in the dispatch — it is read here from the
       #     NVIDIA_KEYS secret (one JSON object, account name -> token,
       #     set by the repo owner), masked, and exported via
@@ -446,7 +446,7 @@ jobs:
       # 12d. Per-run Custom preset choice (Remote-Op dispatch inputs only).
       #     Runs ONLY when a dispatch carried a preset name; a plain
       #     dispatch (or any other trigger) skips it and the run keeps
-      #     the default Zen + OpenCode account setup. Same shape as steps 12b/12c: the
+      #     the Raw default (no account). Same shape as steps 12b/12c: the
       #     token is NEVER sent in the dispatch — it is read here from
       #     the CUSTOM_KEYS secret (one JSON object, preset name ->
       #     token, set by the repo owner), masked, and exported via
@@ -500,11 +500,12 @@ jobs:
           print(f"Custom preset '{preset}' resolved for this run only")
           PYEOF_CU
 
-      # 12e. Default OpenCode account (Remote-Op dispatch inputs only).
+      # 12e. OpenCode account (Remote-Op dispatch inputs only).
       #     Runs when a dispatch carried an account name — which is
-      #     EVERY plain dispatch from Remote-Op: it resolves the
-      #     per-machine account automatically (machine N -> account
-      #     N in settings order, wrapping) and sends only the NAME.
+      #     what Remote-Op sends when OpenCode is picked in the Run
+      #     dialog: it resolves the per-machine account automatically
+      #     (machine N -> account N in settings order, wrapping) and
+      #     sends only the NAME.
       #     Same shape as steps 12b/12c: the token is NEVER sent in
       #     the dispatch — it is read here from the OPENCODE_KEYS
       #     secret (one JSON object, account name -> token, set by
@@ -518,8 +519,8 @@ jobs:
       #     fail fast, with the account name only in the message —
       #     never the token or the JSON. A dispatch with no account
       #     at all (e.g. a manual dispatch with no inputs) skips
-      #     this step; step 13's provider guard then fails fast
-      #     instead of letting the run 401 mid-run with no key.
+      #     this step; the run then boots Raw — the per-instance
+      #     model with no key (2026-11-13: empty means Raw).
       - name: 12e. Resolve OpenCode account for this run
         if: inputs.opencode_account != ''
         env:
@@ -556,22 +557,17 @@ jobs:
           GH_TOKEN: ${{ secrets.MY_PAT }}
           NINE_ROUTER: ${{ inputs.nine_router }}
         run: |
-          # 0. Provider guard: every dispatch must carry a provider —
-          #    Remote-Op always sends one (a plain dispatch carries
-          #    the per-machine opencode_account, the 9router option
-          #    carries nine_router=true, and the other providers
-          #    carry their own inputs). A manual dispatch with no
-          #    inputs would otherwise boot the Zen model with no key
-          #    and fail mid-run with a 401; fail fast here with a
-          #    clear error instead. 12b/12c/12d/12e export their
-          #    signals via $GITHUB_ENV, so they are visible here.
+          # 0. Provider note (2026-11-13): a dispatch with no
+          #    provider inputs is the Raw default — it boots the
+          #    per-instance model with no account key. The other
+          #    providers export their signals via $GITHUB_ENV
+          #    (12b/12c/12d/12e), so they are visible here if set.
           if [ -z "${OPENCODE_API_KEY:-}" ] \
               && [ -z "${OPENROUTER_MODEL:-}" ] \
               && [ -z "${NVIDIA_MODEL:-}" ] \
               && [ -z "${CUSTOM_MODEL:-}" ] \
               && [ -z "${NINE_ROUTER:-}" ]; then
-            echo '::error::no provider selected — dispatch from Remote-Op, or pass opencode_account / nine_router / provider inputs'
-            exit 1
+            echo 'Raw dispatch: no provider inputs — booting the per-instance model with no account key'
           fi
 
           # 1. Install OpenCode V2 — npm package @opencode/cli (the v1
@@ -768,8 +764,8 @@ jobs:
           # the restored db or 9router answers 401. 9router/code is
           # used ONLY when the dispatch explicitly chose it (the
           # nine_router input = "true", sent by Remote-Op's 9router
-          # option); a plain dispatch uses the per-instance Zen
-          # model with the OpenCode account's key (step 12e). A
+          # option); a plain dispatch boots Raw (no account, no
+          # key — the per-instance model, step 12e skipped). A
           # per-run provider choice above still wins for that run
           # only. Choosing 9router with no 9router key is a
           # misconfiguration — fail fast here, not 401 mid-run.
